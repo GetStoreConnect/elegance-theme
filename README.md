@@ -1,2 +1,3 @@
-# elegance-theme
+# Elegance Theme
 StoreConnect Elegance Theme
+
