@@ -2,6 +2,8 @@
 
 The StoreConnect Elegance Theme is a multi-purpose theme and clean theme ideal for cosmetic, clothing, or fashion industries. 
 
+<img width="1496" alt="elegance_theme" src="https://github.com/GetStoreConnect/elegance-theme/assets/77841884/9de4b339-a6a7-452d-ad64-c39b36ffa206">
+
 This versatile design can be easily repurposed or readjusted to suit any store, offering a sophisticated and clean layout. It is specifically tailored to emphasize upsell products, encouraging customers to seamlessly navigate through your offerings. 
 
 
@@ -24,6 +26,14 @@ The theme installer is in your Salesforce org, where you must upload this theme 
 - Cart page upsell products (you can now manually set what's you upsell category on the cart page section)
 - Image swapper on product cards if your product contain more than 1 image
 - Image zoom in effect on product card images
+
+#### Add to cart modal
+
+<img width="1511" alt="elegance_theme_product_modal" src="https://github.com/GetStoreConnect/elegance-theme/assets/77841884/c060deeb-1573-4ffb-914e-808e7dd7b3cc">
+
+#### Cart Sidebar
+
+<img width="1507" alt="elegance_theme_sidebar" src="https://github.com/GetStoreConnect/elegance-theme/assets/77841884/c582c5d6-fc1b-4c51-a372-d69e3eff70d8">
 
 ### New Content Blocks
 
