@@ -6,7 +6,6 @@ The StoreConnect Elegance Theme is a multi-purpose theme and clean theme ideal f
 
 This versatile design can be easily repurposed or readjusted to suit any store, offering a sophisticated and clean layout. It is specifically tailored to emphasize upsell products, encouraging customers to seamlessly navigate through your offerings. 
 
-
 ## Directory Structure
 
 This theme has a specific folder structure containing new and customised templates.
