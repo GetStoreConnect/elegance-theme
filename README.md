@@ -8,8 +8,6 @@ This versatile design can be easily repurposed or readjusted to suit any store, 
 
 ## Directory Structure
 
-This theme has a specific folder structure containing new and customised templates.
-
 Developed using the [Base Theme](https://github.com/GetStoreConnect/base-theme) as a boilerplate. The Elegance theme doesn't contain all the base theme structure, we only include those customised, modified and new templates, snippets, variables or translations. StoreConnect will always fall back to the Base Theme template when a theme does not contain its own customised equivalent template.
 
 ## Theme Installer
