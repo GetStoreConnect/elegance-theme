@@ -260,6 +260,11 @@ p {
 .SC-Header {
   transition: all 0.35s;
 }
+@media screen and (min-width: 768px) {
+  .SC-Header_inner_center {
+    max-width: 100px;
+  }
+}
 @media screen and (min-width: 992px) {
   .SC-Header_inner_center {
     max-width: 630px;
