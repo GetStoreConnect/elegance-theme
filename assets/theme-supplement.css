@@ -64,6 +64,20 @@ p {
     transform: translateY(0%);
   }
 }
+.SC-Banner {
+  background-position: center;
+}
+.SC-Banner_subheading {
+  color: currentColor;
+}
+.SC-Banner_cta {
+  font-size: var(--sc-font-large);
+  font-weight: var(--sc-font-normal);
+  padding: var(--sc-spacing-medium) var(--sc-spacing-xlarge);
+  text-transform: uppercase;
+  transition: all 0.35s;
+}
+
 .sc-button-outline {
   border: 1px solid #000000;
 }
@@ -74,6 +88,11 @@ p {
 }
 .sc-card:hover {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.SC-CardGrid_item {
+  display: flex;
+  flex-direction: column;
 }
 
 .sc-cart_dropdown {
@@ -184,55 +203,13 @@ p {
   line-height: 1;
 }
 
-.SC-Menu.mega, .SC-Menu.dropdown {
-  transition: 0.35s;
-}
-.SC-Menu.mega.tier2 {
-  z-index: var(--sc-depth-floating);
-  padding-bottom: 41px;
-}
-
-.SC-Header {
-  transition: all 0.35s;
-}
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .SC-Header_inner_center {
-    max-width: 0;
-  }
-}
-.SC-Header_search {
-  visibility: hidden;
-  width: 100%;
-  max-height: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
-  overflow: hidden;
-  position: relative;
-  z-index: 2;
-  padding: 0;
-}
-.SC-Header_search.is-active {
-  visibility: visible;
-  max-height: 85px;
-  opacity: 1;
-  transition: all 0.5s;
-  padding: 0 0 var(--sc-spacing-medium) 0;
-}
-
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .SC-Count {
-    right: -20px;
-  }
+.SC-CartProducts {
+  height: calc(100% - 180px);
+  background: #f7f7f7;
 }
 
 .SC-ContentBlockContainer {
   transition: transform 1s, opacity 1s;
-}
-
-@media screen and (max-width: 992px) {
-  .SC-Field-icon svg {
-    transform: translateY(-15%);
-  }
 }
 
 .sc-controls .tns-controls {
@@ -256,19 +233,6 @@ p {
   left: unset;
 }
 
-.SC-LineItem img {
-  max-width: 70px;
-}
-
-.SC-OrderTotal_line {
-  color: currentColor;
-}
-
-.SC-CartProducts {
-  height: calc(100% - 180px);
-  background: #f7f7f7;
-}
-
 .tns-controls button {
   background-color: white;
   transition: all 0.3s linear;
@@ -281,9 +245,64 @@ p {
   background: var(--sc-color-primary);
 }
 
-.SC-CardGrid_item {
-  display: flex;
-  flex-direction: column;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .SC-Count {
+    right: -20px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .SC-Field-icon svg {
+    transform: translateY(-15%);
+  }
+}
+
+.SC-Header {
+  transition: all 0.35s;
+}
+@media screen and (min-width: 768px) {
+  .SC-Header_inner_center {
+    max-width: 100px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .SC-Header_inner_center {
+    max-width: 630px;
+  }
+}
+@media screen and (min-width: 1268px) {
+  .SC-Header_inner_center {
+    max-width: 700px;
+  }
+}
+.SC-Header_search {
+  visibility: hidden;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+.SC-Header_search.is-active {
+  visibility: visible;
+  max-height: 85px;
+  opacity: 1;
+  transition: all 0.5s;
+  padding: 0 0 var(--sc-spacing-medium) 0;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  #SC-HeaderMenuSecondary {
+    column-gap: var(--sc-spacing-base);
+  }
+}
+
+.SC-Icon-medium {
+  width: 40px;
+  height: 40px;
 }
 
 .SC-ImageLink,
@@ -306,6 +325,92 @@ p {
   position: unset;
 }
 
+.SC-LineItem img {
+  max-width: 70px;
+}
+
+.SC-Menu.mega, .SC-Menu.dropdown {
+  transition: 0.35s;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .SC-Menu.mega, .SC-Menu.dropdown {
+    background-color: white;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    font-size: var(--sc-font-large);
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    padding: var(--sc-spacing-large);
+    transform: scale(0.9);
+    transition: transform 100ms ease 0s, opacity 100ms ease 0s;
+    z-index: 4;
+  }
+}
+@media screen and (max-width: 992px) {
+  .SC-Menu.mega, .SC-Menu.dropdown {
+    color: inital;
+  }
+}
+.SC-Menu.mega.is-active, .SC-Menu.dropdown.is-active {
+  opacity: 1;
+  pointer-events: inherit;
+  transform: scale(1);
+}
+.SC-Menu.mega.tier1, .SC-Menu.dropdown.tier1 {
+  margin-left: auto;
+  margin-right: auto;
+}
+.SC-Menu.dropdown.tier2.right {
+  right: 0;
+}
+.SC-Menu.mega {
+  z-index: var(--sc-depth-overlay);
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .SC-Menu.mega.wrap {
+    max-height: none;
+    flex-wrap: nowrap;
+  }
+}
+.SC-Menu.mega.tier2 {
+  z-index: var(--sc-depth-floating);
+  padding-bottom: 41px;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .SC-Menu_button {
+    display: block;
+    padding-left: var(--sc-spacing-medium);
+    padding-right: var(--sc-spacing-medium);
+  }
+}
+.SC-Menu_link {
+  transition: all 0.25s ease-in-out;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .SC-Menu_item.tier2:not(.parent) > a {
+    padding: var(--sc-spacing-medium);
+  }
+}
+@media screen and (max-width: 992px) {
+  .SC-Menu_item.tier1 > a, .SC-Menu_item.tier2:not(.parent) > a, .SC-Menu_item.tier3:not(.parent) > a, .SC-Menu_item.subtle {
+    color: initial;
+  }
+}
+
+.SC-Modal_inner {
+  top: var(--sc-spacing-base);
+}
+
+.SC-OrderTotal_line {
+  color: currentColor;
+}
+
 .SC-ProductCard_image_wrapper {
   overflow: hidden;
 }
@@ -314,30 +419,6 @@ p {
   height: 100%;
   width: 100%;
   overflow: hidden;
-}
-
-.SC-Banner {
-  background-position: center;
-}
-.SC-Banner_subheading {
-  color: currentColor;
-}
-.SC-Banner_cta {
-  background: var(--sc-banner-btn-bg);
-  color: var(--sc-banner-btn-color);
-  font-size: var(--sc-font-large);
-  font-weight: var(--sc-font-normal);
-  padding: var(--sc-spacing-medium) var(--sc-spacing-xlarge);
-  text-transform: uppercase;
-  transition: all 0.35s;
-}
-.SC-Banner_cta:hover {
-  background: var(--sc-banner-btn-bg-hover);
-  color: var(--sc-banner-btn-color-hover);
-}
-
-.SC-Modal_inner {
-  top: var(--sc-spacing-base);
 }
 
 @media screen and (min-width: 1500px) {
