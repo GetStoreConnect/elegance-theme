@@ -22,6 +22,7 @@
       {%- render "header/submenu", category: category %}
     </li>
   {%- endif %}
+  {%- if forloop.index == 7 %}{% break %}{%- endif %}
 {%- endfor %}
 
 <li class="SC-Menu_item tier1">
