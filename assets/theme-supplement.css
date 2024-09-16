@@ -1,6 +1,7 @@
 :root {
   --sc-font-family: "Oswald", sans-serif;
   --sc-base-max-width: 1440px;
+  --sc-article-width: 750px;
 }
 
 body {
@@ -519,6 +520,20 @@ p {
   .sc-expand-up-to-large {
     width: 100%;
   }
+}
+
+.SC-CategorySubcategories .SC-PageNav_link {
+  font-weight: 300;
+}
+
+.SC-CategorySubcategories .SC-PageNav_link,
+.SC-PageNav_content .SC-PageNav_link,
+.SC-Breadcrumb {
+  font-weight: 300;
+}
+
+.SC-Article {
+  max-width: var(--sc-article-width);
 }
 
 /*# sourceMappingURL=theme-supplement.css.map */
