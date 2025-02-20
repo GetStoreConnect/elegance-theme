@@ -1,14 +1,5 @@
 :root {
-  --sc-font-family: "Oswald", sans-serif;
   --sc-base-max-width: 1440px;
-}
-
-body {
-  font-family: "Oswald", sans-serif;
-}
-
-p {
-  font-weight: 300;
 }
 
 .fadeIn {
@@ -66,6 +57,10 @@ p {
 }
 .SC-Banner {
   background-position: center;
+}
+.SC-Banner_heading {
+  font-family: var(--sc-font-secondary);
+  font-weight: 400;
 }
 .SC-Banner_subheading {
   color: currentColor;
@@ -521,4 +516,4 @@ p {
   }
 }
 
-/*# sourceMappingURL=theme-supplement.css.map */
+/*# sourceMappingURL=styles.css.map */
