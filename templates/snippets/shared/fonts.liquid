@@ -1,5 +1,4 @@
-{% assign primary_font_url = "https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;600&display=swap" %}
-{% assign secondary_font_url = "" %}
+{% assign primary_font_url = "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
 
@@ -9,8 +8,14 @@
   <link rel="stylesheet" href="{{ primary_font_url }}">
 </noscript>
 
-<link rel="preload" as="style" href="{{ secondary_font_url }}">
-<link rel="stylesheet" href="{{ secondary_font_url }}" media="print" onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" href="{{ secondary_font_url }}">
-</noscript>
+<style>
+  :root {
+    --sc-font-family: "Mulish", -apple-system, BlinkMacSystemFont, sans-serif;
+    --sc-font-secondary: "Lora", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  body {
+    font-family: var(--sc-font-family);
+    font-size: calc(var(--sc-font-base) + 1px);
+    font-weight: 300
+  }
+</style>
