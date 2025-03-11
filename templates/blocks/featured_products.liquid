@@ -1,20 +1,22 @@
-{% assign count = content_block.products | size %}
+{%- liquid
+    assign count = content_block.products | size
 
-{%- if count <= 4 %}
-  {%- assign spacing = "sc-mb" %}
-{%- endif %}
+    if count <= 4
+      assign spacing = "sc-mb" | default: blank
+    endif
+%}
 
 <section class="SC-FeaturedProducts sc-expand sc-md:me-xlarge sc-pe-large sc-controls"
          id="SC-ContentBlock-{{ content_block.identifier }}">
 
   {% if content_block.title != blank or content_block.subtitle %}
-  <div class="SC-FeaturedProducts_header sc-flex sc-justify-space-between sc-align-items-center {{ spacing }}">
+  <div class="SC-FeaturedProducts_header sc-flex-col-to-row sc-gap-small sc-justify-space-between sc-max-width sc-ms-auto sc-ps sc-mb-small{% if spacing != blank %} {{ spacing }}{% endif %}">
     <div>
     {% if content_block.subtitle != blank %}
-      <p class="sc-font-small sc-uppercase sc-mb-tiny sc-font-small sc-uppercase sc-mb-tiny">{{ content_block.subtitle }}</p>
+      <p class="sc-font-small sc-uppercase sc-mb-tiny sc-font-small sc-font-secondary sc-uppercase sc-mb-tiny">{{ content_block.subtitle }}</p>
     {% endif %}
     {% if content_block.title != blank %}
-      <h2 class="sc-font-large sc-font-bold sc-uppercase sc-m-none">{{ content_block.title }}</h2>
+      <h2 class="sc-font-large sc-font-normal sc-font-secondary sc-uppercase sc-m-none">{{ content_block.title }}</h2>
     {% endif %}
     </div>
     <div>
@@ -28,16 +30,22 @@
   {% endif %}
 
   {% if count <= 4 %}
-    <div class="sc-grid sc-two-to-four-column">
-      {%- for product in content_block.products %}
-        {%- render "products/card", product: product %}
-      {%- endfor %}
-    </div>
-  {% elsif count >  4 %}
-      <div class="sc-flex sc-gap sc-pb-base sc-mt" data-featured-slider="{{ content_block.identifier }}">
+    <div class="sc-max-width sc-ms-auto sc-ps">
+      <div class="sc-grid sc-two-to-four-column">
         {%- for product in content_block.products %}
           {%- render "products/card", product: product %}
         {%- endfor %}
       </div>
+    </div>
+  {% elsif count >  4 %}
+    <div class="sc-max-width sc-ms-auto sc-ps">
+      <div class="sc-flex" data-featured-slider="{{ content_block.identifier }}">
+        {%- for product in content_block.products %}
+          <div>
+            {%- render "products/card", product: product %}
+          </div>
+        {%- endfor %}
+      </div>
+    </div>
   {% endif %}
 </section>
