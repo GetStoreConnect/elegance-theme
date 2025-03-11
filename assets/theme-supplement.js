@@ -1,42 +1,36 @@
-document.addEventListener('DOMContentLoaded', () => {
+const CUSTOM_PARAMS =  {
+  items: 1,
+  gutter: 20,
+  responsive: {
+    768: { items: 3 },
+    992: { items: 4 },
+    1700: { items: 5 }
+  },
+  touch: true,
+  mouseDrag: true,
+  nav: false,
+  swipeAngle: 20,
+  speed: 400
+}
 
-  const featuredSlider = (function () {
+let sliders = [];
 
-    const CUSTOM_PARAMS =  {
-      items: 1,
-      responsive: {
-        768: { items: 3 },
-        992: { items: 4 },
-        1700: { items: 5 }
-      },
-      gutter: 20,
-      nav: false,
-      mouseDrag: true,
-      swipeAngle: false,
-      speed: 400
+function sliderInit() {
+  ;[...document.querySelectorAll('[data-featured-slider]:not([data-initialized])')].forEach((sliderEl) => {
+    sliderEl.setAttribute('data-initialized', true)
+    const container = {
+      container: '[data-featured-slider=' + sliderEl.getAttribute('data-featured-slider') + ']',
     }
+    const slideshow = tns({ ...CUSTOM_PARAMS, ...container })
 
-    let customsliders = [];
-    // Check if the page has Custom Carousels before intialising them
-    $(() => {
-      if (document.querySelectorAll('[data-featured-slider]')) {
-        [...document.querySelectorAll('[data-featured-slider]')].map(slider => {
-          featuredSlider.init('[data-featured-slider=' + slider.getAttribute('data-featured-slider') + ']');
-        });
-      }
+    let resizeId
+
+    sliders.push(sliderEl)
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeId)
+      resizeId = setTimeout(() => slideshow.updateSliderHeight(), 300)
     })
+  })
+}
 
-    return {
-      init: (selector, params) => {
-        const container = {
-          container: selector,
-        },
-
-        slider = tns({ ...CUSTOM_PARAMS, ...params, ...container });
-
-        customsliders.push(slider);
-      }
-    }
-
-  })();
-});
+document.addEventListener('DOMContentLoaded', sliderInit);
