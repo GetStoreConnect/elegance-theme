@@ -15,7 +15,8 @@
       {%- else %}
         {% render "shared/placeholder_image" %}
       {%- endif %}
-      {%- if product.images.size > 1 %}
+      {% assign product_images = product.images.size %}
+      {%- if product_images > 1 %}
         {% assign firstImg = product.images.[1] %}
         <img loading="lazy" src="{{ firstImg.medium_url }}" alt="{{ firstImg.alt_text }}">
       {%- endif %}
