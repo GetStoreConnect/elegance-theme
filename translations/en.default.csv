@@ -6,8 +6,8 @@ cart.modal.success_message,Added to cart successfully!
 cart.modal.quantity_label,Qty %{qty}
 cart.modal.item_total_amount,Total %{total}
 cart.modal.empty_message,Nothing recently added
-cart.modal.cart_count_message,There {%count_verb%} %{count} item <br> in your cart
+cart.modal.cart_count_message,There %{count_verb} %{count} item%{modifier} <br> in your cart
 cart.modal.recently_added_message,Recently added:
 cart.modal.select_option,Select option
-cart.modal.total,Cart total: {%total}
+cart.modal.total,Cart total: %{total}
 cart.sidebar.title,Shopping Cart
