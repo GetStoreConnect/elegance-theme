@@ -10,7 +10,7 @@
               {%- if item.name == product_name %}
                 <h3 class="sc-font-light sc-font-medium sc-color-sale">
                   <span>{% render 'shared/icons/check', height: "1em", style_class: "sc-mr-tiny" %}</span>
-                  <span>{{ "cart.modal.success_message" | }}</span>
+                  <span>{{ "cart.modal.success_message" | t }}</span>
                 </h3>
                 <img 
                   src="{{ current_product.image.medium_url }}" 
@@ -22,8 +22,8 @@
                   <span>{{ item.name }}</span>
                   <span class="sc-mb-small">{{ current_product.pricing.price | money, compact: false }}</span>
                   <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.quantity_label" | t: qty: item.quantity }}</span>
-                  {%- capture total_price -%}{% assign total = item.pricing.checkout_price | money, compact: false %}
-                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.item_total_amount" | t: total: total_price }}</span>
+                  {%- assign total_item_price = item.pricing.checkout_price | money, compact: false -%}
+                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.item_total_amount" | t: total: total_item_price }}</span>
                 </div>
               {% break %}
               {% elsif forloop.last %}
@@ -40,7 +40,7 @@
                 <div class="sc-flex-col sc-gap-tiny">
                   <span>{{ item.name }}</span>
                   <span class="sc-mb-small">{{ item.pricing.price | money, compact: false }}</span>
-                  {%- capture total_price -%}{% assign total = item.pricing.checkout_price | money, compact: false %}
+                  {%- capture total_price -%}{% assign total = item.pricing.checkout_price | money, compact: false %}{%- endcapture -%}
                   <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.quantity_label" | t: qty: item.quantity }}</span>
                   <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.item_total_amount" | t: total: total_price }}</span>
                 </div>
@@ -54,12 +54,15 @@
         </div>
         <div class="sc-flex-col sc-gap sc-pb sc-text-center sc-pe">
           {%- if current_cart.item_count == 1 %}
-            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: "is", count: current_cart.item_count }}</p>
+            {%- assign verb = "is" -%}
+            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: verb, modifier: "", count: current_cart.item_count }}</p>
           {% else %}
-            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: "are", count: current_cart.item_count }}</p>
+            {%- assign verb = "are" -%}
+            {%- assign modifier = "s" -%}
+            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: verb, modifier: modifier, count: current_cart.item_count }}</p>
           {%- endif %}
-            {% capture cart_total %}{% assign current_cart_total = current_cart.total | money, compact: false %}{% endcapture %}
-            <p class="sc-font-light"><span data-currency class="sc-font-medium">{{ "cart.modal.total" | t, total: cart_total }}</span></p>
+            {% assign current_cart_total = current_cart.total | money, compact: false %}
+            <p class="sc-font-light"><span data-currency class="sc-font-medium">{{ "cart.modal.total" | t: total: current_cart_total }}</span></p>
           {%- render 'shared/cart/continue_shopping_button', class: "sc-cart_button sc-button-outline sc-ms-auto sc-three-quarters" %}
           {%- render "shared/cart/view_cart_button", class: "sc-cart_button sc-bg-darkest sc-ms-auto sc-three-quarters sc-color-white" %}
         </div>
