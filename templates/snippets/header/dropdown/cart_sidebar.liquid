@@ -10,7 +10,7 @@
               {%- if item.name == product_name %}
                 <h3 class="sc-font-light sc-font-medium sc-color-sale">
                   <span>{% render 'shared/icons/check', height: "1em", style_class: "sc-mr-tiny" %}</span>
-                  <span>{{ "Added to cart successfully!" }}</span>
+                  <span>{{ "cart.modal.success_message" | t }}</span>
                 </h3>
                 <img 
                   src="{{ current_product.image.medium_url }}" 
@@ -19,16 +19,17 @@
                   class="sc-ms-auto"
                   >
                 <div class="sc-flex-col sc-gap-tiny">
-                      <span>{{ item.name }}</span>
-                      <span class="sc-mb-small">{{ current_product.pricing.price | money, compact: false }}</span>
-                      <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "Qty:"}} {{ item.quantity }}</span>
-                      <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "Total:" }} {{ item.pricing.checkout_price | money, compact: false }}</span>
+                  <span>{{ item.name }}</span>
+                  <span class="sc-mb-small">{{ current_product.pricing.price | money, compact: false }}</span>
+                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.quantity_label" | t: qty: item.quantity }}</span>
+                  {%- assign total_item_price = item.pricing.checkout_price | money, compact: false -%}
+                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.item_total_amount" | t: total: total_item_price }}</span>
                 </div>
               {% break %}
               {% elsif forloop.last %}
                 <h3 class="sc-font-light sc-font-medium sc-color-sale">
                   <span>{% render 'shared/icons/check', height: "1em", style_class: "sc-mr-tiny" %}</span>
-                  <span>{{ "Recently added:" }}</span>
+                  <span>{{ "cart.modal.recently_added_message" | t }} </span>
                 </h3>
                 <img 
                   src="{{ item.product.image.medium_url }}" 
@@ -37,26 +38,31 @@
                   class="sc-ms-auto"
                   >
                 <div class="sc-flex-col sc-gap-tiny">
-                      <span>{{ item.name }}</span>
-                      <span class="sc-mb-small">{{ item.pricing.price | money, compact: false }}</span>
-                      <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "Qty:"}} {{ item.quantity }}</span>
-                      <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "Total:" }} {{ item.pricing.checkout_price | money, compact: false }}</span>
+                  <span>{{ item.name }}</span>
+                  <span class="sc-mb-small">{{ item.pricing.price | money, compact: false }}</span>
+                  {%- capture total_price -%}{% assign total = item.pricing.checkout_price | money, compact: false %}{%- endcapture -%}
+                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.quantity_label" | t: qty: item.quantity }}</span>
+                  <span class="sc-display-inline-block sc-font-light sc-font-small">{{ "cart.modal.item_total_amount" | t: total: total_price }}</span>
                 </div>
               {%- endif %}
             {%- endfor %}
           {% else %}
             <h3 class="sc-font-light sc-font-medium sc-color-sale">
-              <span>{{ "Nothing recently added" }}</span>
+              <span>{{ "cart.modal.empty_message" | t }}</span>
             </h3>
           {%- endif %}
         </div>
         <div class="sc-flex-col sc-gap sc-pb sc-text-center sc-pe">
           {%- if current_cart.item_count == 1 %}
-            <p style="line-height: 20px;"> There is {{ current_cart.item_count }} item <br> in your cart</p>
+            {%- assign verb = "is" -%}
+            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: verb, modifier: "", count: current_cart.item_count }}</p>
           {% else %}
-            <p style="line-height: 20px;"> There are {{ current_cart.item_count }} items <br> in your cart</p>
+            {%- assign verb = "are" -%}
+            {%- assign modifier = "s" -%}
+            <p style="line-height: 20px;">{{ "cart.modal.cart_count_message" | t: count_verb: verb, modifier: modifier, count: current_cart.item_count }}</p>
           {%- endif %}
-            <p class="sc-font-light">{{ "Cart total:" }} <span data-currency class="sc-font-medium">{{ current_cart.total | money, compact: false }}</span></p>
+            {% assign current_cart_total = current_cart.total | money, compact: false %}
+            <p class="sc-font-light"><span data-currency class="sc-font-medium">{{ "cart.modal.total" | t: total: current_cart_total }}</span></p>
           {%- render 'shared/cart/continue_shopping_button', class: "sc-cart_button sc-button-outline sc-ms-auto sc-three-quarters" %}
           {%- render "shared/cart/view_cart_button", class: "sc-cart_button sc-bg-darkest sc-ms-auto sc-three-quarters sc-color-white" %}
         </div>
@@ -71,7 +77,7 @@
       {% if count > 0 %}
 
       <div class="SC-Modal_footer sc-border-top sc-pt-base">
-        <h3 class="sc-mb sc-color-black">{{ "sc.upsell.products.modal.title" | t }}</h3>
+        <h3 class="sc-mb sc-color-black">{{ "cart.modal.upsell_products_title" | t }}</h3>
 
         {%# slider %}
         <div id="modal-slider" data-upsell-products-slider>
@@ -88,7 +94,7 @@
                   <div class="sc-text-center sc-mt-small">
                     <h4 class="sc-font-light sc-font-base sc-color-black sc-mb-tiny">{{ related.name }}</h4>
                     {%- if related.variants.size > 0 %}
-                      <a class="SC-Link sc-font-light sc-font-base sc-mt-micro" href="{{ related.path }}">{{ "Select option" }}</a>
+                      <a class="SC-Link sc-font-light sc-font-base sc-mt-micro" href="{{ related.path }}">{{ "cart.modal.select_option" | t }}</a>
                     {%- else %}
                       <p class="sc-font-light sc-font-base sc-mt-micro" data="{{ related.variants.size }}">{{ related.pricing.price | money, compact: true }}</p>
                     {%- endif %}
@@ -110,7 +116,7 @@
                   <div class="sc-text-center sc-mt-small">
                     <h4 class="sc-font-light sc-font-base sc-color-black sc-mb-tiny">{{ related.name }}</h4>
                     {%- if related.variants.size > 0 %}
-                      <a class="sc-font-light sc-font-base" href="{{ related.path }}">{{ "Select option" }}</a>
+                      <a class="sc-font-light sc-font-base" href="{{ related.path }}">{{ "cart.modal.select_option" | t }}</a>
                     {%- else %}
                       <p class="sc-font-light sc-font-base sc-mt-micro" data="{{ related.variant? }}">{{ related.pricing.price | money, compact: true }}</p>
                     {%- endif %}
@@ -126,9 +132,7 @@
 
       {%# floating close button %}
       <div class="sc-cart_close sc-cursor-pointer sc-bg-lightest sc-shadow" data-modal-trigger="cart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" viewBox="0 0 384 512">
-          <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"/>
-        </svg>
+        {%- render "shared/icons/close", width: "1.3rem" %}
       </div>
     </div>
     <div class="SC-Modal_overlay"></div>
@@ -139,13 +143,11 @@
       <div class="sc-cart_header sc-border-bottom-lightest">
         <div class="sc-cart_header_section sc-p-small sc-border-right-lightest">
           <button data-modal-trigger="cart" type="button" class="sc-flex">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" viewBox="0 0 384 512">
-              <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"/>
-            </svg>
+            {%- render "shared/icons/close", width: "1.3rem" %}
           </button>
         </div>
         <div class="sc-p-small">
-          <h3 class="sc-m-none">{{ "Shopping Cart" }}</h3>
+          <h3 class="sc-m-none">{{ "cart.sidebar.title" | t }}</h3>
         </div>
         <div class="sc-cart_header_section sc-p-small sc-border-left-lightest">
         {{ current_cart.item_count }}
