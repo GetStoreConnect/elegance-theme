@@ -13,23 +13,23 @@
                   child_category_levels: 1 %}
     {%- endfor %}
 
-      {%- if current_customer != blank %}
-        <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-account">
-          <a href="{{ current_store.account_path }}" class="SC-Menu_link">
-            {{ "header.dropdowns.account.heading" | t }}
-          </a>
-        </li>
-        <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-logout">
-          <a href="{{ current_store.logout_path }}" class="SC-Menu_link">
-            {{ "header.dropdowns.account.logout" | t }}
-          </a>
-        </li>
-      {%- else %}
-        <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-login">
-          <a href="{{ current_store.login_path }}" class="SC-Menu_link">
-            {{ "header.dropdowns.account.login" | t }}
-          </a>
-        </li>
-      {%- endif %}
+    {%- if current_customer != blank %}
+      <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-account">
+        <a href="{{ current_store.account_path }}" class="SC-Menu_link">
+          {{ "header.dropdowns.account.heading" | t }}
+        </a>
+      </li>
+      <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-logout">
+        <a href="{{ current_store.logout_path }}" class="SC-Menu_link">
+          {{ "header.dropdowns.account.logout" | t }}
+        </a>
+      </li>
+    {%- else %}
+      <li class="SC-Menu_item tier1 sc-hide-medium-and-up" id="SC-MenuItem-login">
+        <a href="{{ current_store.login_path }}" class="SC-Menu_link">
+          {{ "header.dropdowns.account.login" | t }}
+        </a>
+      </li>
+    {%- endif %}
   </ul>
 {%- endif %}
