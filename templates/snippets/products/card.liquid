@@ -1,5 +1,5 @@
 {%- default product: blank -%}
-{%- default show_compare: false -%}
+{%- default allow_comparisons: false -%}
 
 <div class="SC-ProductCard" id="product_{{ product.id }}">
   {%- comment %} Image {% endcomment %}
@@ -191,7 +191,9 @@
       {%- endunless %}
     {%- endif %}
     {%- comment %} Compare {% endcomment %}
-    {%- if show_compare %}
+    {%- if allow_comparisons and theme_variables["products.comparisons"] == true %}
+      {%- require "scripts/product-comparison.js" -%}
+
       <div class="sc-me-tiny">
         <label class="SC-Checkbox">
           <input data-js-compare-add id="{{ product.id }}" class="SC-Checkbox_input" type="checkbox"/>
