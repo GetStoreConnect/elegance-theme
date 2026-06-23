@@ -15,7 +15,7 @@
       {%- endif %}
     </a>
     {%- endcapture %}
-    
+
     {%- assign menu_identifier = current_store.header_menu | try: "identifier" | default: "header" %}
 
     <header class="SC-Header" id="SC-Header">
@@ -23,9 +23,9 @@
       <div class="SC-Header_inner">
 
         <div class="SC-Header_inner_left">
-          <button 
-            data-menu-init="{{ menu_identifier }}" 
-            class="SC-Icon SC-Icon-button SC-Icon-large sc-hide-large-and-up" 
+          <button
+            data-menu-init="{{ menu_identifier }}"
+            class="SC-Icon SC-Icon-button SC-Icon-large sc-hide-large-and-up"
             type="button">
             {%- render "shared/icons/hamburger" %}
           </button>
@@ -53,7 +53,7 @@
           <ul class="SC-Menu tier1 end sc-justify-end" id="SC-HeaderMenuSecondary">
             {%- render "header/dropdown/search" %}
             {%- render "header/dropdown/account" %}
-            {%- render "header/dropdown/cart" %}
+            {%- component "cart-menu", reload: "sc.cart-updated sc.voucher-applied sc.voucher-removed" %}
           </ul>
         </div>
       </div>
