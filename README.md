@@ -1,10 +1,12 @@
 # Elegance Theme
 
+**Version: StoreConnect v21**
+
 The StoreConnect Elegance Theme is a multi-purpose theme ideal for cosmetic, clothing, or fashion industries.
 
 <img width="1496" alt="elegance_theme" src="https://github.com/GetStoreConnect/elegance-theme/assets/77841884/9de4b339-a6a7-452d-ad64-c39b36ffa206">
 
-This versatile design can be easily repurposed or readjusted to suit any store, offering a sophisticated and clean layout. It is specifically tailored to emphasize upsell products, encouraging customers to seamlessly navigate through your offerings. 
+This versatile design can be easily repurposed or readjusted to suit any store, offering a sophisticated and clean layout. It is specifically tailored to emphasize upsell products, encouraging customers to seamlessly navigate through your offerings.
 
 ## Directory Structure
 
